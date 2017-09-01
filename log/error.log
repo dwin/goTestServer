@@ -1,0 +1,52 @@
+{"time":"2017-08-31T23:23:10-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-08-31T23:36:59-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-08-31T23:37:05-04:00","level":"error","message":"Error: Could not obtain client IP"}
+{"time":"2017-08-31T23:53:03-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-08-31T23:53:53-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-08-31T23:57:30-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-08-31T23:59:20-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T00:18:46-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T00:49:13-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T12:32:07-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T12:33:19-04:00","level":"warn","Status Request":-1,"message":"Status Request outside acceptable range"}
+{"time":"2017-09-01T12:33:31-04:00","level":"warn","Status Request":1001,"message":"Status Request outside acceptable range"}
+{"time":"2017-09-01T12:33:42-04:00","level":"warn","Status Request":1200,"message":"Status Request outside acceptable range"}
+{"time":"2017-09-01T12:34:00-04:00","level":"warn","Status Request":1000,"message":"Status Request outside acceptable range"}
+{"time":"2017-09-01T12:34:48-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T12:34:53-04:00","level":"warn","Status Request":1000,"message":"Status Request outside acceptable range"}
+{"time":"2017-09-01T13:06:15-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T13:19:41-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T13:23:12-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T13:24:03-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T13:25:58-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T13:33:46-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T13:34:13-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T13:46:51-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T13:48:50-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T13:52:29-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T14:02:56-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T14:10:15-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T14:15:20-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T14:26:32-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T14:28:24-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T14:32:20-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T14:35:24-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T14:50:39-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T14:53:32-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T14:55:01-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T14:55:52-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T14:58:00-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T14:58:39-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T14:59:07-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T15:33:49-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T15:34:24-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T15:55:12-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T15:56:49-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T15:58:16-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T15:58:19-04:00","level":"warn","Request param:":"ldd","message":"Client requested unsupported image type"}
+{"time":"2017-09-01T15:58:39-04:00","level":"error","error":"open ../static/markus-spiske-221494.jpg: no such file or directory","message":"Could not open jpg for GetImage"}
+{"time":"2017-09-01T16:23:16-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T16:33:05-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T16:40:39-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
+{"time":"2017-09-01T16:41:13-04:00","level":"error","error":"open ../static/SampleVideo_640x360_2mb.3gp: no such file or directory","message":"Could not open 3gp for GetVideo"}
+{"time":"2017-09-01T16:41:43-04:00","level":"info","Server Port":":8080","message":"Starting Server"}
