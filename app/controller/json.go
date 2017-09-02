@@ -11,7 +11,7 @@ import (
 // The request responds to a url matching:  /delete?name=Jane
 func DeleteCookieJSON(c *gin.Context) {
 	name := c.Query("name")
-	c.SetCookie(name, "", 1, "/json/cookies", "localhost", false, false)
+	c.SetCookie(name, "", 1, "/json/cookies", u.AppHostname, false, false)
 	c.Redirect(302, "/json/cookies")
 	return
 }
@@ -100,7 +100,7 @@ func GetUUIDJSON(c *gin.Context) {
 func SetCookieJSON(c *gin.Context) {
 	name := c.Query("name")
 	value := c.Query("value")
-	c.SetCookie(name, value, 36400, "/json/cookies", "localhost", false, false)
+	c.SetCookie(name, value, 36400, "/json/cookies", u.AppHostname, false, false)
 	c.Redirect(302, "/json/cookies")
 	return
 }

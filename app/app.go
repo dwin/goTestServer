@@ -10,13 +10,16 @@ import (
 var servePort = ":8080"
 
 // TODO: Check all request length, kill connection if size unreasonable for type
-
 func main() {
+	R := AppEngine()
+	R.Run(servePort) // 0.0.0.0:8080
+}
+func AppEngine() *gin.Engine {
 	// Creates a gin router with default middleware:
 	// logger and recovery (crash-free) middleware
 	router := gin.Default()
-	router.StaticFile("/favicon.ico", "./static/icon.ico")
-	router.Static("/static", "./static")
+	router.StaticFile("/favicon.ico", "../static/icon.ico")
+	router.Static("/static", "../static")
 	router.LoadHTMLGlob("view/*")
 	router.GET("/", controller.GetIndex)
 
@@ -37,5 +40,7 @@ func main() {
 	router.GET("/status/:status", controller.GetStatus)
 
 	u.Log.Info().Str("Server Port", servePort).Msg("Starting Server")
-	router.Run(servePort) // 0.0.0.0:8080
+	//router.Run(servePort) // 0.0.0.0:8080
+
+	return router
 }
