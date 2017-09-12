@@ -1,7 +1,11 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/gin-gonic/gin"
+	"github.com/rs/zerolog"
+	lumberjack "gopkg.in/natefinch/lumberjack.v2"
 
 	"github.com/dwin/goTestServer/app/controller"
 	u "github.com/dwin/goTestServer/app/utils"
@@ -18,8 +22,23 @@ func AppEngine() *gin.Engine {
 	// Creates a gin router with default middleware:
 	// logger and recovery (crash-free) middleware
 	router := gin.Default()
-	router.StaticFile("/favicon.ico", "/static/icon.ico")
-	router.Static("/static", "/static")
+	mode := gin.Mode()
+	fmt.Println(mode)
+	if gin.Mode() == "release" {
+		router.StaticFile("/favicon.ico", "/static/icon.ico")
+		router.Static("/static", "/static")
+	} else if gin.Mode() == "debug" {
+		u.Log = zerolog.New(&lumberjack.Logger{
+			Filename:   "../log/error.log",
+			MaxSize:    50, // megabytes
+			MaxBackups: 30,
+			MaxAge:     90, //days
+		}).With().Timestamp().Logger()
+		router.StaticFile("/favicon.ico", "../static/icon.ico")
+		router.Static("/static", "../static")
+	}
+	//router.StaticFile("/favicon.ico", "/static/icon.ico")
+	//router.Static("/static", "/static")
 	router.LoadHTMLGlob("view/*")
 	router.GET("/", controller.GetIndex)
 
