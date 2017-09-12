@@ -6,7 +6,7 @@ import (
 )
 
 var Log = zerolog.New(&lumberjack.Logger{
-	Filename:   "../log/error.log",
+	Filename:   "/log/error.log",
 	MaxSize:    50, // megabytes
 	MaxBackups: 30,
 	MaxAge:     90, //days
