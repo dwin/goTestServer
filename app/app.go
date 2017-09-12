@@ -26,7 +26,7 @@ func AppEngine() *gin.Engine {
 	j := router.Group("/json")
 	{
 		j.GET("/cookies", controller.GetCookiesJSON)
-		j.GET("get", controller.GetJSON)
+		j.GET("", controller.GetJSON)
 		j.GET("/ip", controller.GetIPJSON)
 		j.GET("/headers", controller.GetHeadersJSON)
 		j.GET("/cookies/set", controller.SetCookieJSON)
