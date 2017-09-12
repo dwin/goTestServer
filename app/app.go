@@ -18,8 +18,8 @@ func AppEngine() *gin.Engine {
 	// Creates a gin router with default middleware:
 	// logger and recovery (crash-free) middleware
 	router := gin.Default()
-	router.StaticFile("/favicon.ico", "../static/icon.ico")
-	router.Static("/static", "../static")
+	router.StaticFile("/favicon.ico", "/static/icon.ico")
+	router.Static("/static", "/static")
 	router.LoadHTMLGlob("view/*")
 	router.GET("/", controller.GetIndex)
 
