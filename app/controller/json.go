@@ -2,7 +2,6 @@ package controller
 
 import (
 	"fmt"
-	"net"
 
 	u "github.com/dwin/goTestServer/app/utils"
 	"github.com/gin-gonic/gin"
@@ -41,23 +40,12 @@ func GetJSON(c *gin.Context) {
 
 // GetIPJSON returns JSON with IP address of client
 func GetIPJSON(c *gin.Context) {
-	if len(c.ClientIP()) < 7 {
+	if len(c.ClientIP()) < 6 {
 		// Log Failure
 		u.Log.Error().Msg("Error: Could not obtain client IP")
 	}
-	ip, _, err := net.SplitHostPort(c.Request.RemoteAddr)
-	if err != nil {
-		//return nil, fmt.Errorf("userip: %q is not IP:port", req.RemoteAddr)
-
-		u.Log.Error().Msgf("userip: %q is not IP:port", c.Request.RemoteAddr)
-	}
-	userIP := net.ParseIP(ip)
-	if userIP == nil {
-		//return nil, fmt.Errorf("userip: %q is not IP:port", req.RemoteAddr)
-		u.Log.Error().Msgf("userip: %q is not IP:port", c.Request.RemoteAddr)
-	}
 	c.IndentedJSON(200, gin.H{
-		"origin-ip": userIP,
+		"origin-ip": c.ClientIP(),
 	})
 	return
 }
@@ -80,7 +68,7 @@ func GetUserAgentJSON(c *gin.Context) {
 		})
 		return
 	}
-	u.Log.Error().Str("IP", c.Request.RemoteAddr).Msg("Could not read user-agent from client")
+	u.Log.Error().Str("IP", c.ClientIP()).Msg("Could not read user-agent from client")
 	c.IndentedJSON(400, gin.H{
 		"error": "Could not read user-agent from client",
 	})
