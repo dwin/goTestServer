@@ -2,6 +2,7 @@ package controller
 
 import (
 	"fmt"
+	"net"
 
 	u "github.com/dwin/goTestServer/app/utils"
 	"github.com/gin-gonic/gin"
@@ -43,11 +44,20 @@ func GetIPJSON(c *gin.Context) {
 	if len(c.ClientIP()) < 7 {
 		// Log Failure
 		u.Log.Error().Msg("Error: Could not obtain client IP")
-		c.String(500, "Error: Unable to obtain client IP")
-		return
+	}
+	ip, _, err := net.SplitHostPort(c.Request.RemoteAddr)
+	if err != nil {
+		//return nil, fmt.Errorf("userip: %q is not IP:port", req.RemoteAddr)
+
+		u.Log.Error().Msgf("userip: %q is not IP:port", c.Request.RemoteAddr)
+	}
+	userIP := net.ParseIP(ip)
+	if userIP == nil {
+		//return nil, fmt.Errorf("userip: %q is not IP:port", req.RemoteAddr)
+		u.Log.Error().Msgf("userip: %q is not IP:port", c.Request.RemoteAddr)
 	}
 	c.IndentedJSON(200, gin.H{
-		"origin-ip": c.ClientIP(),
+		"origin-ip": userIP,
 	})
 	return
 }
@@ -91,7 +101,7 @@ func GetUUIDJSON(c *gin.Context) {
 		})
 		return
 	default:
-		c.String(400, "Must request version. ex. /json/uuid/4")
+		c.String(400, "Must request version. ex. /json/uuid/4 or /json/uuid/1")
 		return
 	}
 }
