@@ -26,13 +26,25 @@
 </head>
 <body>
     <div class="grid-container">
-        <div class="grid-x grid-padding-x">
-            <div class="large-12 cell">
-            <h1>{{ .title }}</h1>
-            </div>
+        <div data-sticky-container>
+            <div class="top-bar" data-sticky data-options="marginTop:0;" style="width:100%">
+                    <div class="top-bar-left">
+                      <ul class="dropdown menu" data-dropdown-menu>
+                        <li class="menu-text">{{ .title }}</li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Docs</a></li>
+                        <li><a href="#">Privacy</a></li>
+                      </ul>
+                    </div>
+                    <div class="top-bar-right">
+                      <ul class="menu">
+                            <li><a href="github.com/dwin/gotestserver">Github</a></li>
+                      </ul>
+                    </div>
+                  </div>
         </div>
         <div class="grid-x grid-padding-x">
-            <div class="large-8 cell"
+            <div class="large-8 cell">
                 <img src="/static/lewis-ngugi-186309.jpg" alt="Computer Screen showing Software Development" height="480" width="720">
             </div>
         </div>
@@ -72,7 +84,11 @@
                 <li><a href="/status/500">/status/500 - Return Status code 500</a></li>
                 <li>/status/# you may request any valid status code to return that status</li>
             </ul>
+        </div>
+        <div class="grid-x grid-padding-x">
+            <div class="large-8 cell">
             <p><a href="https://status.http-test.net">status.http-test.net</a> - Status Page</p>
+            </div>
         </div>
     </div>
 <!-- Piwik Image Tracker-->
