@@ -85,3 +85,19 @@ func TestSetCookieJSON(t *testing.T) {
 		assert.Contains(t, "cookies", r.Body)
 	})
 }
+
+func TestPostBlake2bJSON(t *testing.T) {
+	r := gofight.New()
+	r.POST("/json/blake2b/512").
+		SetDebug(true).
+		Run(AppEngine(), func(resp gofight.HTTPResponse, req gofight.HTTPRequest) {
+			assert.Equal(t, 200, resp.Code)
+			assert.Contains(t, "786a02f742015903c6c6fd852552d272912f4740e15847618a86e217f71f5419d25e1031afee585313896444934eb04b903a685b1448b755d56f701afe9be2ce", r.Body)
+		})
+	r.POST("/json/blake2b/256").
+		SetDebug(true).
+		Run(AppEngine(), func(resp gofight.HTTPResponse, req gofight.HTTPRequest) {
+			assert.Equal(t, 200, resp.Code)
+			assert.Contains(t, "0e5751c026e543b2e8ab2eb06099daa1d1e5df47778f7787faab45cdf12fe3a8", r.Body)
+		})
+}

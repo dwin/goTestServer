@@ -1,10 +1,13 @@
 package controller
 
 import (
+	"encoding/hex"
 	"fmt"
+	"io/ioutil"
 
 	u "github.com/dwin/goTestServer/app/utils"
 	"github.com/gin-gonic/gin"
+	"github.com/minio/blake2b-simd"
 	uuid "github.com/satori/go.uuid"
 )
 
@@ -101,4 +104,38 @@ func SetCookieJSON(c *gin.Context) {
 	c.SetCookie(name, value, 36400, "/json/cookies", u.AppHostname, false, false)
 	c.Redirect(302, "/json/cookies")
 	return
+}
+
+func PostBlake2bJSON(c *gin.Context) {
+	switch ver := c.Param("size"); ver {
+	case "512":
+		body, err := ioutil.ReadAll(c.Request.Body)
+		if err != nil {
+			u.Log.Error().Err(err).Msg("Error reading request body for GetBlake2b512JSON")
+			c.Status(500)
+			return
+		}
+		hash := blake2b.Sum512(body)
+		b2bHex := hex.EncodeToString(hash[:])
+		c.IndentedJSON(200, gin.H{
+			"blake2b-512": b2bHex,
+		})
+		return
+	case "256":
+		body, err := ioutil.ReadAll(c.Request.Body)
+		if err != nil {
+			u.Log.Error().Err(err).Msg("Error reading request body for GetBlake2b256JSON")
+			c.Status(500)
+			return
+		}
+		hash := blake2b.Sum256(body)
+		b2bHex := hex.EncodeToString(hash[:])
+		c.IndentedJSON(200, gin.H{
+			"blake2b-256": b2bHex,
+		})
+		return
+	default:
+		c.String(400, "Unsupported version. ex. /json/blake2b/512 or /json/blake2b/256")
+		return
+	}
 }

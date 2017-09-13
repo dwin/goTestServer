@@ -8,7 +8,6 @@ ENV GIN_MODE=release
 
 WORKDIR /go/src/app
 COPY /app /go/src/app
-COPY /static /static
 
 RUN go-wrapper download
 RUN go-wrapper install

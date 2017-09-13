@@ -3,16 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ .title }}</title>
+
+    <link rel="stylesheet" href="https://f001.backblazeb2.com/file/httptestcdn/css/style.css">
+    <!-- Piwik -->
+    <script type="text/javascript">
+        var _paq = _paq || [];
+        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+        var u="//analytics.lakeshoretechservices.com/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+    </script>
+    <!-- End Piwik Code -->
 </head>
 
 <body>
 <h1>{{ .title }}</h1>
-
+<!-- Piwik Image Tracker-->
+<noscript><img src="https://analytics.lakeshoretechservices.com/piwik.php?idsite=1&rec=1&action_name=Index" style="border:0" alt="" /></noscript>
+<!-- End Piwik -->
 <img src="/static/lewis-ngugi-186309.jpg" alt="Computer Screen showing Software Development" height="480" width="720">
 
-<ul><h6>Routes</h6>
-    <li><a href="/json">Echo Request as JSON</a></li>
+<ul><h3>Routes</h3>
+    <li><h4>JSON - /json</h4></li>
+    <li><a href="/json">/json - Echo Request</a></li>
+    <li><a href="/json/ip">/json/ip -  Client IP</a></li>
+    <li><a href="/json/headers">/json/headers -  Show Headers</a></li>
+    <li><a href="/json/cookies">/json/cookies -  Show Cookies</a></li>
+    <li><a href="/json/cookies/set?name=Jane&value=Doe">/json/cookies/set?name=Jane&value=Doe -  Set Cookie</a></li>
+    <li><a href="/json/cookies/delete?name=Jane">/json/cookies/delete?name=Jane -  Delete Cookie</a></li>
+    <li><a href="/json/user-agent">/json/user-agent -  Show User-Agent</a></li>
+    <li><a href="/json/uuid/1">/json/uuid/1 -  Generate UUIDv1</a></li>
+    <li><a href="/json/uuid/4">/json/uuid/4 -  Generate UUIDv4</a></li>
+    <li><br></li>
+    <li>Send POST to Hash Body data as JSON in Hex form</li>
+    <li>/json/blake2b/512 - Generate Blake2b-512 Hash</li>
+    <li>/json/blake2b/256 - Generate Blake2b-256 Hash</li>
+    <li><br></li>
+    <li><a href="/image/jpg">/image/jpg - Show JPG</a></li>
+    <li><a href="/image/jp2">/image/jp2 - Show JPEG2000</a></li>
+    <li><a href="/image/png">/image/png - Show PNG</a></li>
+    <li><a href="/image/webp">/image/webp - Show WebP</a></li>
+
+    <li><a href="/video/3gp">/video/3gp - Show 3gp</a></li>
+    <li><a href="/video/flv">/video/flv - Show FLV</a></li>
+    <li><a href="/video/h264">/video/h264 - Show h264</a></li>
+    <li><a href="/video/h265">/video/h265 - Show h265</a></li>
+    <li><a href="/video/mp4">/video/mp4 - Show MP4</a></li>
+    <li><a href="/video/mkv">/video/mkv - Show MKV</a></li>
+    <li><a href="/video/ogv">/video/ogv - Show ogv</a></li>
+    <li><a href="/video/theora">/video/theora - Show Theora</a></li>
+    <li><a href="/video/webm">/video/webm - Show WebM</a></li>
+    <li></li>
+    <li><a href="/status/404">/status/404 - Return Status code 404</a></li>
+    <li><a href="/status/500">/status/500 - Return Status code 500</a></li>
+    <li>/status/# you may request any valid status code to return that status</li>
 </ul>
 
+<p><a href="https://status.http-test.net">status.http-test.net</a> - Status Page</p>
 </body>
 </html>

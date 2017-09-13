@@ -47,6 +47,7 @@ func AppEngine() *gin.Engine {
 		j.GET("/cookies", controller.GetCookiesJSON)
 		j.GET("", controller.GetJSON)
 		j.GET("/ip", controller.GetIPJSON)
+		j.POST("/blake2b/:size", controller.PostBlake2bJSON)
 		j.GET("/headers", controller.GetHeadersJSON)
 		j.GET("/cookies/set", controller.SetCookieJSON)
 		j.GET("/cookies/delete", controller.DeleteCookieJSON)
