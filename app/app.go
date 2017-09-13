@@ -27,6 +27,7 @@ func AppEngine() *gin.Engine {
 	if gin.Mode() == "release" {
 		router.StaticFile("/favicon.ico", "/static/icon.ico")
 		router.Static("/static", "/static")
+		router.LoadHTMLGlob("/static/view/*")
 	} else if gin.Mode() == "debug" {
 		u.Log = zerolog.New(&lumberjack.Logger{
 			Filename:   "../log/error.log",
@@ -36,10 +37,11 @@ func AppEngine() *gin.Engine {
 		}).With().Timestamp().Logger()
 		router.StaticFile("/favicon.ico", "../static/icon.ico")
 		router.Static("/static", "../static")
+		router.LoadHTMLGlob("view/*")
 	}
 	//router.StaticFile("/favicon.ico", "/static/icon.ico")
 	//router.Static("/static", "/static")
-	router.LoadHTMLGlob("view/*")
+
 	router.GET("/", controller.GetIndex)
 
 	j := router.Group("/json")
