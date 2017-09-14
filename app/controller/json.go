@@ -1,6 +1,10 @@
 package controller
 
 import (
+	"crypto/md5"
+	"crypto/sha1"
+	"encoding/base32"
+	"encoding/base64"
 	"encoding/hex"
 	"fmt"
 	"io/ioutil"
@@ -8,7 +12,9 @@ import (
 	u "github.com/dwin/goTestServer/app/utils"
 	"github.com/gin-gonic/gin"
 	"github.com/minio/blake2b-simd"
+	"github.com/minio/sha256-simd"
 	uuid "github.com/satori/go.uuid"
+	"golang.org/x/crypto/sha3"
 )
 
 // The request responds to a url matching:  /delete?name=Jane
@@ -105,13 +111,38 @@ func SetCookieJSON(c *gin.Context) {
 	c.Redirect(302, "/json/cookies")
 	return
 }
-
+func PostBase32JSON(c *gin.Context) {
+	body, err := ioutil.ReadAll(c.Request.Body)
+	if err != nil {
+		u.Log.Error().Err(err).Msg("Error reading request body for PostBase32JSON")
+		c.Status(500)
+		return
+	}
+	base32str := base32.StdEncoding.EncodeToString(body)
+	c.IndentedJSON(200, gin.H{
+		"base32": base32str,
+	})
+	return
+}
+func PostBase64JSON(c *gin.Context) {
+	body, err := ioutil.ReadAll(c.Request.Body)
+	if err != nil {
+		u.Log.Error().Err(err).Msg("Error reading request body for PostBase64JSON")
+		c.Status(500)
+		return
+	}
+	base64str := base64.StdEncoding.EncodeToString(body)
+	c.IndentedJSON(200, gin.H{
+		"base64": base64str,
+	})
+	return
+}
 func PostBlake2bJSON(c *gin.Context) {
 	switch ver := c.Param("size"); ver {
 	case "512":
 		body, err := ioutil.ReadAll(c.Request.Body)
 		if err != nil {
-			u.Log.Error().Err(err).Msg("Error reading request body for GetBlake2b512JSON")
+			u.Log.Error().Err(err).Msg("Error reading request body for PostBlake2b512JSON")
 			c.Status(500)
 			return
 		}
@@ -124,7 +155,7 @@ func PostBlake2bJSON(c *gin.Context) {
 	case "256":
 		body, err := ioutil.ReadAll(c.Request.Body)
 		if err != nil {
-			u.Log.Error().Err(err).Msg("Error reading request body for GetBlake2b256JSON")
+			u.Log.Error().Err(err).Msg("Error reading request body for PostBlake2b256JSON")
 			c.Status(500)
 			return
 		}
@@ -136,6 +167,107 @@ func PostBlake2bJSON(c *gin.Context) {
 		return
 	default:
 		c.String(400, "Unsupported version. ex. /json/blake2b/512 or /json/blake2b/256")
+		return
+	}
+}
+func PostMD5JSON(c *gin.Context) {
+	body, err := ioutil.ReadAll(c.Request.Body)
+	if err != nil {
+		u.Log.Error().Err(err).Msg("Error reading request body for PostMD5JSON")
+		c.Status(500)
+		return
+	}
+	hash := md5.Sum(body)
+	md5hex := hex.EncodeToString(hash[:])
+	c.IndentedJSON(200, gin.H{
+		"md5": md5hex,
+	})
+	return
+}
+func PostSHA1JSON(c *gin.Context) {
+	body, err := ioutil.ReadAll(c.Request.Body)
+	if err != nil {
+		u.Log.Error().Err(err).Msg("Error reading request body for PostSHA1JSON")
+		c.Status(500)
+		return
+	}
+	hash := sha1.Sum(body)
+	sha1hex := hex.EncodeToString(hash[:])
+	c.IndentedJSON(200, gin.H{
+		"sha1": sha1hex,
+	})
+	return
+}
+func PostSHA256JSON(c *gin.Context) {
+	body, err := ioutil.ReadAll(c.Request.Body)
+	if err != nil {
+		u.Log.Error().Err(err).Msg("Error reading request body for PostSHA256JSON")
+		c.Status(500)
+		return
+	}
+	hash := sha256.Sum256(body)
+	sha256hex := hex.EncodeToString(hash[:])
+	c.IndentedJSON(200, gin.H{
+		"sha2-256": sha256hex,
+	})
+	return
+}
+func PostSHA3JSON(c *gin.Context) {
+	switch ver := c.Param("size"); ver {
+	case "512":
+		body, err := ioutil.ReadAll(c.Request.Body)
+		if err != nil {
+			u.Log.Error().Err(err).Msg("Error reading request body for PostSHA3-512JSON")
+			c.Status(500)
+			return
+		}
+		hash := sha3.Sum512(body)
+		sha3_512hex := hex.EncodeToString(hash[:])
+		c.IndentedJSON(200, gin.H{
+			"sha3-512": sha3_512hex,
+		})
+		return
+	case "384":
+		body, err := ioutil.ReadAll(c.Request.Body)
+		if err != nil {
+			u.Log.Error().Err(err).Msg("Error reading request body for PostSHA3-384JSON")
+			c.Status(500)
+			return
+		}
+		hash := sha3.Sum384(body)
+		sha3_384hex := hex.EncodeToString(hash[:])
+		c.IndentedJSON(200, gin.H{
+			"sha3-384": sha3_384hex,
+		})
+		return
+	case "256":
+		body, err := ioutil.ReadAll(c.Request.Body)
+		if err != nil {
+			u.Log.Error().Err(err).Msg("Error reading request body for PostSHA3-256JSON")
+			c.Status(500)
+			return
+		}
+		hash := sha3.Sum256(body)
+		sha3_256hex := hex.EncodeToString(hash[:])
+		c.IndentedJSON(200, gin.H{
+			"sha3-256": sha3_256hex,
+		})
+		return
+	case "224":
+		body, err := ioutil.ReadAll(c.Request.Body)
+		if err != nil {
+			u.Log.Error().Err(err).Msg("Error reading request body for PostSHA3-224JSON")
+			c.Status(500)
+			return
+		}
+		hash := sha3.Sum224(body)
+		sha3_224hex := hex.EncodeToString(hash[:])
+		c.IndentedJSON(200, gin.H{
+			"sha3-224": sha3_224hex,
+		})
+		return
+	default:
+		c.String(400, "Unsupported version. ex. /json/sha3/512 , /json/sha3/384 , /json/sha3/256 , /json/sha3/224")
 		return
 	}
 }
