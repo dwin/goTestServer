@@ -18,6 +18,8 @@ func main() {
 	R := AppEngine()
 	R.Run(servePort) // 0.0.0.0:8080
 }
+
+// AppEngine contains all routes for the app
 func AppEngine() *gin.Engine {
 	// Creates a gin router with default middleware:
 	// logger and recovery (crash-free) middleware
@@ -25,9 +27,10 @@ func AppEngine() *gin.Engine {
 	mode := gin.Mode()
 	fmt.Println(mode)
 	if gin.Mode() == "release" {
-		router.StaticFile("/favicon.ico", "/static/icon.ico")
+		u.Environment = "production"
+		router.StaticFile("/favicon.ico", "/static/img/icon.ico")
 		router.Static("/static", "/static")
-		router.LoadHTMLGlob("/static/view/*")
+		router.LoadHTMLGlob("/view/*")
 	} else if gin.Mode() == "debug" {
 		u.Log = zerolog.New(&lumberjack.Logger{
 			Filename:   "../log/error.log",
@@ -35,12 +38,10 @@ func AppEngine() *gin.Engine {
 			MaxBackups: 30,
 			MaxAge:     90, //days
 		}).With().Timestamp().Logger()
-		router.StaticFile("/favicon.ico", "../static/icon.ico")
+		router.StaticFile("/favicon.ico", "../static/img/icon.ico")
 		router.Static("/static", "../static")
-		router.LoadHTMLGlob("view/*")
+		router.LoadHTMLGlob("../view/*")
 	}
-	//router.StaticFile("/favicon.ico", "/static/icon.ico")
-	//router.Static("/static", "/static")
 
 	router.GET("/", controller.GetIndex)
 
@@ -66,7 +67,7 @@ func AppEngine() *gin.Engine {
 	}
 	router.GET("/image/:type", controller.GetImage)
 	router.GET("/video/:type", controller.GetVideo)
-	router.GET("/redirect/:redirects") //TODO: Not working
+	router.GET("/redirect/:num", controller.GetRedirects)
 	router.GET("/status/:status", controller.GetStatus)
 
 	u.Log.Info().Str("Server Port", servePort).Msg("Starting Server")

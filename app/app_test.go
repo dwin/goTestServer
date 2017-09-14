@@ -23,7 +23,7 @@ func TestFavicon(t *testing.T) {
 
 func TestStaticText(t *testing.T) {
 	r := gofight.New()
-	r.GET("/static/test.txt").SetDebug(true).Run(AppEngine(), func(resp gofight.HTTPResponse, req gofight.HTTPRequest) {
+	r.GET("/static/file/test.txt").SetDebug(true).Run(AppEngine(), func(resp gofight.HTTPResponse, req gofight.HTTPRequest) {
 		assert.Equal(t, 200, resp.Code)
 	})
 }
@@ -41,7 +41,7 @@ func TestVideoMP4(t *testing.T) {
 }
 func TestRedirects(t *testing.T) {
 	r := gofight.New()
-	r.GET("/redirect/15").SetDebug(true).Run(AppEngine(), func(resp gofight.HTTPResponse, req gofight.HTTPRequest) {
+	r.GET("/redirect/1").SetDebug(true).Run(AppEngine(), func(resp gofight.HTTPResponse, req gofight.HTTPRequest) {
 		assert.Equal(t, 302, resp.Code)
 	})
 }
