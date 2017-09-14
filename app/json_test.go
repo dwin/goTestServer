@@ -40,7 +40,6 @@ func TestGetDateTimeJSON(t *testing.T) {
 
 func TestGetIPJSON(t *testing.T) {
 	r := gofight.New()
-	//r.SetHeader(gofight.H{"HTTP_CLIENT_IP": "0.0.0.0"})
 	r.GET("/json/ip").SetDebug(true).Run(AppEngine(), func(resp gofight.HTTPResponse, req gofight.HTTPRequest) {
 		assert.Equal(t, 200, resp.Code)
 		assert.Contains(t, "origin-ip", r.Body)
