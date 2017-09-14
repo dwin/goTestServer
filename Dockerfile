@@ -1,6 +1,7 @@
 FROM golang:alpine 
 LABEL maintainer "Darwin Smith II <dwin@dlsmi.com>"
 LABEL app_version="0.1.0" architecture="amd64"
+RUN echo $'#!/bin/sh\nntpd -d -q -n -p us.pool.ntp.org' > /etc/periodic/hourly/getntp
 RUN apk add --no-cache git
 VOLUME /static
 VOLUME /log
