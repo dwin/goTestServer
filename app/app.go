@@ -53,6 +53,7 @@ func AppEngine() *gin.Engine {
 		j.GET("/datetime", controller.GetDateTimeJSON)
 		j.GET("/headers", controller.GetHeadersJSON)
 		j.GET("/ip", controller.GetIPJSON)
+		j.GET("/status", controller.GetStatusJSON)
 		j.GET("/user-agent", controller.GetUserAgentJSON)
 		j.GET("/uuid/:version", controller.GetUUIDJSON)
 		j.POST("/base32", controller.PostBase32JSON)

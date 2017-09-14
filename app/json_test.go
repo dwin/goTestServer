@@ -63,6 +63,13 @@ func TestGetUserAgentJSON(t *testing.T) {
 		assert.Contains(t, "Gofight-client/1.0", r.Body)
 	})
 }
+func TestGetStatusJSON(t *testing.T) {
+	r := gofight.New()
+	r.GET("/json/status").SetDebug(true).Run(AppEngine(), func(resp gofight.HTTPResponse, req gofight.HTTPRequest) {
+		assert.Equal(t, 200, resp.Code)
+		assert.Contains(t, "ok", r.Body)
+	})
+}
 func TestGetUUIDv1JSON(t *testing.T) {
 	r := gofight.New()
 	r.GET("/json/uuid/1").SetDebug(true).Run(AppEngine(), func(resp gofight.HTTPResponse, req gofight.HTTPRequest) {

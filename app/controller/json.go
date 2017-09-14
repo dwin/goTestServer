@@ -118,6 +118,12 @@ func GetUUIDJSON(c *gin.Context) {
 		return
 	}
 }
+func GetStatusJSON(c *gin.Context) {
+	c.JSON(200, gin.H{
+		"status": "ok",
+	})
+	return
+}
 
 // The request responds to a url matching:  /set?name=Jane&value=Doe
 func SetCookieJSON(c *gin.Context) {
