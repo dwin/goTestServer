@@ -85,7 +85,24 @@ func TestSetCookieJSON(t *testing.T) {
 		assert.Contains(t, "cookies", r.Body)
 	})
 }
-
+func TestPostBase32JSON(t *testing.T) {
+	r := gofight.New()
+	r.POST("/json/base32").
+		SetDebug(true).
+		Run(AppEngine(), func(resp gofight.HTTPResponse, req gofight.HTTPRequest) {
+			assert.Equal(t, 200, resp.Code)
+			assert.Contains(t, "base32", r.Body)
+		})
+}
+func TestPostBase64JSON(t *testing.T) {
+	r := gofight.New()
+	r.POST("/json/base64").
+		SetDebug(true).
+		Run(AppEngine(), func(resp gofight.HTTPResponse, req gofight.HTTPRequest) {
+			assert.Equal(t, 200, resp.Code)
+			assert.Contains(t, "base64", r.Body)
+		})
+}
 func TestPostBlake2bJSON(t *testing.T) {
 	r := gofight.New()
 	r.POST("/json/blake2b/512").
@@ -99,5 +116,59 @@ func TestPostBlake2bJSON(t *testing.T) {
 		Run(AppEngine(), func(resp gofight.HTTPResponse, req gofight.HTTPRequest) {
 			assert.Equal(t, 200, resp.Code)
 			assert.Contains(t, "0e5751c026e543b2e8ab2eb06099daa1d1e5df47778f7787faab45cdf12fe3a8", r.Body)
+		})
+}
+func TestPostMD5JSON(t *testing.T) {
+	r := gofight.New()
+	r.POST("/json/md5").
+		SetDebug(true).
+		Run(AppEngine(), func(resp gofight.HTTPResponse, req gofight.HTTPRequest) {
+			assert.Equal(t, 200, resp.Code)
+			assert.Contains(t, "md5", r.Body)
+		})
+}
+func TestPostSHA1JSON(t *testing.T) {
+	r := gofight.New()
+	r.POST("/json/sha1").
+		SetDebug(true).
+		Run(AppEngine(), func(resp gofight.HTTPResponse, req gofight.HTTPRequest) {
+			assert.Equal(t, 200, resp.Code)
+			assert.Contains(t, "da39a3ee5e6b4b0d3255bfef95601890afd80709", r.Body)
+		})
+}
+func TestPostSHA256JSON(t *testing.T) {
+	r := gofight.New()
+	r.POST("/json/sha256").
+		SetDebug(true).
+		Run(AppEngine(), func(resp gofight.HTTPResponse, req gofight.HTTPRequest) {
+			assert.Equal(t, 200, resp.Code)
+			assert.Contains(t, "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", r.Body)
+		})
+}
+func TestPostSHA3JSON(t *testing.T) {
+	r := gofight.New()
+	r.POST("/json/sha3/512").
+		SetDebug(true).
+		Run(AppEngine(), func(resp gofight.HTTPResponse, req gofight.HTTPRequest) {
+			assert.Equal(t, 200, resp.Code)
+			assert.Contains(t, "sha3-512", r.Body)
+		})
+	r.POST("/json/sha3/384").
+		SetDebug(true).
+		Run(AppEngine(), func(resp gofight.HTTPResponse, req gofight.HTTPRequest) {
+			assert.Equal(t, 200, resp.Code)
+			assert.Contains(t, "sha3-384", r.Body)
+		})
+	r.POST("/json/sha3/256").
+		SetDebug(true).
+		Run(AppEngine(), func(resp gofight.HTTPResponse, req gofight.HTTPRequest) {
+			assert.Equal(t, 200, resp.Code)
+			assert.Contains(t, "sha3-256", r.Body)
+		})
+	r.POST("/json/sha3/224").
+		SetDebug(true).
+		Run(AppEngine(), func(resp gofight.HTTPResponse, req gofight.HTTPRequest) {
+			assert.Equal(t, 200, resp.Code)
+			assert.Contains(t, "sha3-224", r.Body)
 		})
 }
