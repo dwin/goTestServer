@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"fmt"
 	"strconv"
 
 	u "github.com/dwin/goTestServer/app/utils"
@@ -26,14 +27,17 @@ func GetStatus(c *gin.Context) {
 
 // GetRedirects returns redirect code time specified by client in parameter
 func GetRedirects(c *gin.Context) {
-	redirs, err := strconv.Atoi(c.Param("redirects"))
+	redirs, err := strconv.Atoi(c.Param("num"))
 	if err != nil {
 		u.Log.Error().Err(err).Msg("Error parsing int in GetRedirects")
 		c.AbortWithError(500, err)
 		return
 	}
-	for i := 0; i < redirs; i++ {
-		c.Redirect(302, "/json/get")
+	if redirs < 1 {
+		fmt.Println("less than 1")
+		c.Redirect(302, "/")
 	}
+
+	c.Redirect(302, fmt.Sprintf("/redirect/%v", redirs-1))
 	return
 }
