@@ -29,6 +29,14 @@ func TestGetJSON(t *testing.T) {
 		assert.Contains(t, "origin-ip", r.Body)
 	})
 }
+func TestGetDateTimeJSON(t *testing.T) {
+	r := gofight.New()
+	r.GET("/json/datetime").SetDebug(true).Run(AppEngine(), func(resp gofight.HTTPResponse, req gofight.HTTPRequest) {
+		assert.Equal(t, 200, resp.Code)
+		assert.Contains(t, "ANSIC", r.Body)
+		assert.Contains(t, "RFC3339", r.Body)
+	})
+}
 
 func TestGetIPJSON(t *testing.T) {
 	r := gofight.New()

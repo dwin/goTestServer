@@ -8,6 +8,7 @@ import (
 	"encoding/hex"
 	"fmt"
 	"io/ioutil"
+	"time"
 
 	u "github.com/dwin/goTestServer/app/utils"
 	"github.com/gin-gonic/gin"
@@ -28,6 +29,21 @@ func GetCookiesJSON(c *gin.Context) {
 	cookies := c.Request.Header.Get("Cookie")
 	c.IndentedJSON(200, gin.H{
 		"cookies": cookies,
+	})
+	return
+}
+func GetDateTimeJSON(c *gin.Context) {
+	tz, _ := time.Time.Zone(time.Now())
+	c.IndentedJSON(200, gin.H{
+		"TZ":          tz,
+		"UnixDate":    time.Now().Format(time.UnixDate),
+		"Unix Nano":   time.Now().Local().UnixNano(),
+		"RFC3339":     time.Now().Format(time.RFC3339),
+		"RFC1123":     time.Now().Format(time.RFC1123),
+		"RFC3339Nano": time.Now().Format(time.RFC3339Nano),
+		"RFC822":      time.Now().Format(time.RFC822),
+		"RFC850":      time.Now().Format(time.RFC850),
+		"ANSIC":       time.Now().Format(time.ANSIC),
 	})
 	return
 }
