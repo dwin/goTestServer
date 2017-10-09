@@ -5,9 +5,10 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ .title }}</title>
-    <link rel="stylesheet" href="https://f001.backblazeb2.com/file/httptestcdn/css/style.css">
+    <link rel="stylesheet" href="https://cdn.http-test.net/file/httptestcdn/css/style.css">
     <link rel="stylesheet" href="/static/css/foundation.css">
     <link rel="stylesheet" href="/static/css/app.css">
+	<link rel="stylesheet" href="/static/css/foundation-icons.css"/>
     <!-- Piwik -->
     <script type="text/javascript">
         var _paq = _paq || [];
@@ -23,6 +24,7 @@
         })();
     </script>
     <!-- End Piwik Code -->
+	<meta name="google-site-verification" content="AFCcWnr_pzS8lvgIvHifEAKfy-jtIpTqvAWqRAupVgg" />
 </head>
 <body>
     <div class="grid-container">
@@ -30,46 +32,62 @@
             <div class="top-bar" data-sticky data-options="marginTop:0;" style="width:100%">
                     <div class="top-bar-left">
                       <ul class="dropdown menu" data-dropdown-menu>
-                        <li class="menu-text">{{ .title }}</li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Docs</a></li>
-                        <li><a href="#">Privacy</a></li>
+                        <li class="menu-text">HTTP-Test.net</li>
+                        <li><a href="/static/about.html">About</a></li>
                       </ul>
                     </div>
                     <div class="top-bar-right">
                       <ul class="menu">
-                            <li><a href="github.com/dwin/gotestserver">Github</a></li>
+                            <li><a href="https://github.com/dwin/goTestServer"><i class="fi-social-github"></i></a></li>
                       </ul>
                     </div>
                   </div>
         </div>
         <div class="grid-x grid-padding-x">
-            <div class="large-8 cell">
-                <img src="/static/lewis-ngugi-186309.jpg" alt="Computer Screen showing Software Development" height="480" width="720">
-            </div>
+            
         </div>
         <div class="grid-x grid-padding-x">
-            <ul><h3>Routes</h3>
+        	<div class="small-4 cell">
+                <img src="https://cdn.http-test.net/file/httptestcdn/img/lewis-ngugi-186309.jpg" alt="Computer Screen showing Software Development" height="480" width="720">
+                <br>
+                <h3>HTTP Client Testing Server</h3>
+        </div>
+		<div class="large-8 cell">
+            <ul><h3>Endpoints</h3>
                 <li><h4>JSON - /json</h4></li>
-                <li><a href="/json">/json - Echo Request</a></li>
+                <li><a href="/json">/json/get - Show GET request data</a></li>
+                <li><a href="/json/any">/json/any - Shows request data including method</a></li>
                 <li><a href="/json/ip">/json/ip -  Client IP</a></li>
                 <li><a href="/json/headers">/json/headers -  Show Headers</a></li>
                 <li><a href="/json/cookies">/json/cookies -  Show Cookies</a></li>
                 <li><a href="/json/cookies/set?name=Jane&value=Doe">/json/cookies/set?name=Jane&value=Doe -  Set Cookie</a></li>
                 <li><a href="/json/cookies/delete?name=Jane">/json/cookies/delete?name=Jane -  Delete Cookie</a></li>
+                <li><a href="/json/datetime">/json/datetime -  Show Datetime</a></li>
                 <li><a href="/json/user-agent">/json/user-agent -  Show User-Agent</a></li>
+			   <li><a href="/json/status">/json/status -  Get API Status</a></li>
                 <li><a href="/json/uuid/1">/json/uuid/1 -  Generate UUIDv1</a></li>
                 <li><a href="/json/uuid/4">/json/uuid/4 -  Generate UUIDv4</a></li>
                 <li><br></li>
                 <li>Send POST to Hash Body data as JSON in Hex form</li>
                 <li>/json/blake2b/512 - Generate Blake2b-512 Hash</li>
                 <li>/json/blake2b/256 - Generate Blake2b-256 Hash</li>
+                <li>/json/md5 - Generate MD5 Hash</li>
+                <li>/json/sha1 - Generate SHA1 Hash</li>
+                <li>/json/sha256 - Generate SHA256 Hash</li>
+                <li>/json/sha3-224 - Generate SHA3-224 Hash</li>
+                <li>/json/sha3-256 - Generate SHA3-256 Hash</li>
+                <li>/json/sha3-384 - Generate SHA3-384 Hash</li>
+                <li>/json/sha3-512 - Generate SHA3-512 Hash</li>
+                <li><br></li>
+                <li>Send POST to Encode Body data as JSON</li>
+                <li>/json/base32 - Encode to Base32</li>
+                <li>/json/base64 - Encode to Base64</li>
                 <li><br></li>
                 <li><a href="/image/jpg">/image/jpg - Show JPG</a></li>
                 <li><a href="/image/jp2">/image/jp2 - Show JPEG2000</a></li>
                 <li><a href="/image/png">/image/png - Show PNG</a></li>
                 <li><a href="/image/webp">/image/webp - Show WebP</a></li>
-            
+				<li><br></li>
                 <li><a href="/video/3gp">/video/3gp - Show 3gp</a></li>
                 <li><a href="/video/flv">/video/flv - Show FLV</a></li>
                 <li><a href="/video/h264">/video/h264 - Show h264</a></li>
@@ -79,16 +97,34 @@
                 <li><a href="/video/ogv">/video/ogv - Show ogv</a></li>
                 <li><a href="/video/theora">/video/theora - Show Theora</a></li>
                 <li><a href="/video/webm">/video/webm - Show WebM</a></li>
-                <li></li>
+                <li><br></li>
+                <li>/status/# - may request any valid status code to return that status</li>
                 <li><a href="/status/404">/status/404 - Return Status code 404</a></li>
                 <li><a href="/status/500">/status/500 - Return Status code 500</a></li>
-                <li>/status/# you may request any valid status code to return that status</li>
+			   <li><br></li>
+                <li>/redirect/# - Sends redirect type 302 to client up to # of times then finally to '/'</li>
+                <li><a href="/redirect/3">/redirect/3 - Redirects # of times</a></li>
+                <li><br></li>
+                <li><a href="/robots.txt">/robots.txt - Returns robots.txt file</a></li>
+                <li><a href="/sitemap.xml">/sitemap.xml - Returns sitemap.xml file</a></li>
             </ul>
-        </div>
-        <div class="grid-x grid-padding-x">
-            <div class="large-8 cell">
-            <p><a href="https://status.http-test.net">status.http-test.net</a> - Status Page</p>
             </div>
+        </div>
+		<div data-sticky-container>
+            <div class="title-bar" id="footer-bar" data-sticky data-stick-to="bottom" style="width:100%">
+                    <div class="title-bar-left">
+                      <ul class="menu">
+                        <li><a href="https://status.http-test.net">Status Page</a></li>
+					   <li><a href="/static/docs.html">Docs</a></li>
+                        <li><a href="/static/privacy.html">Privacy</a></li>
+                      </ul>
+                    </div>
+                    <div class="title-bar-right">
+                      <ul class="menu align-right">
+                            <li>&copy; 2017 Darwin Smith II </li>
+                      </ul>
+                    </div>
+                  </div>
         </div>
     </div>
 <!-- Piwik Image Tracker-->

@@ -8,8 +8,10 @@ import (
 	"encoding/hex"
 	"fmt"
 	"io/ioutil"
+	"regexp"
 	"time"
 
+	"github.com/dwin/goTestServer/app/model"
 	u "github.com/dwin/goTestServer/app/utils"
 	"github.com/gin-gonic/gin"
 	"github.com/minio/blake2b-simd"
@@ -60,6 +62,31 @@ func GetJSON(c *gin.Context) {
 		"origin-ip": fmt.Sprintf("%s", c.ClientIP()),
 		"uri":       c.Request.RequestURI,
 	})
+	return
+}
+
+// AnyJSON returns JSON with request data
+func AnyJSON(c *gin.Context) {
+	h := make(map[string]string)
+	for k, v := range c.Request.Header {
+		h[k] = fmt.Sprintf("%v", v)
+	}
+	c.IndentedJSON(200, gin.H{
+		"args":      "",
+		"headers":   h,
+		"origin-ip": fmt.Sprintf("%s", c.ClientIP()),
+		"uri":       c.Request.RequestURI,
+		"method":    c.Request.Method,
+	})
+	token, tExist := c.GetQuery("token")
+	re := regexp.MustCompile(`([\w-]{9,11})`)
+	if !re.MatchString(token) {
+		c.String(400, "Invalid token")
+		return
+	}
+	if tExist {
+		go model.SaveRequest(token, c)
+	}
 	return
 }
 
@@ -120,7 +147,8 @@ func GetUUIDJSON(c *gin.Context) {
 }
 func GetStatusJSON(c *gin.Context) {
 	c.IndentedJSON(200, gin.H{
-		"status": "ok",
+		"status":     "ok",
+		"app uptime": time.Since(u.StartTime).String(),
 	})
 	return
 }

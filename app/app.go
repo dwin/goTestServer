@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/rs/zerolog"
@@ -16,6 +17,7 @@ var servePort = ":8080"
 // TODO: Check all request length, kill connection if size unreasonable for type
 func main() {
 	R := AppEngine()
+	//router.Run(servePort) // 0.0.0.0:8080
 	R.Run(servePort) // 0.0.0.0:8080
 }
 
@@ -27,6 +29,7 @@ func AppEngine() *gin.Engine {
 	mode := gin.Mode()
 	fmt.Println(mode)
 	if gin.Mode() == "release" {
+		// See '/utils/log.go' for production logging settings
 		u.Environment = "production"
 		router.StaticFile("/favicon.ico", "/static/img/icon.ico")
 		router.Static("/static", "/static")
@@ -44,10 +47,15 @@ func AppEngine() *gin.Engine {
 	}
 
 	router.GET("/", controller.GetIndex)
-
+	t := router.Group("/token")
+	{
+		t.GET("/new", controller.GetNewToken)
+		t.GET("/view/:token", controller.GetListTokenRequests)
+	}
 	j := router.Group("/json")
 	{
-		j.GET("", controller.GetJSON)
+		j.GET("/get", controller.GetJSON)
+		j.Any("/any", controller.AnyJSON)
 		j.GET("/cookies", controller.GetCookiesJSON)
 		j.GET("/cookies/set", controller.SetCookieJSON)
 		j.GET("/cookies/delete", controller.DeleteCookieJSON)
@@ -65,13 +73,14 @@ func AppEngine() *gin.Engine {
 		j.POST("/sha256", controller.PostSHA256JSON)
 		j.POST("/sha3/:size", controller.PostSHA3JSON)
 	}
+
 	router.GET("/image/:type", controller.GetImage)
 	router.GET("/video/:type", controller.GetVideo)
 	router.GET("/redirect/:num", controller.GetRedirects)
 	router.GET("/status/:status", controller.GetStatus)
 
+	u.Log.Info().Str("Current Time", u.StartTime.Format(time.UnixDate)).Msg("App start timestamp")
 	u.Log.Info().Str("Server Port", servePort).Msg("Starting Server")
-	//router.Run(servePort) // 0.0.0.0:8080
 
 	return router
 }
